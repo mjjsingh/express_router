@@ -1,32 +1,18 @@
-// Import required modules
-const express = require('express');
-const fs = require('fs');
 const app = express();
-app.use(express.json());
 
-// Serve static files from public directory
-app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: false}));
 
-// Route for login
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/login.html');
+app.use('/add-product', (req, res, next)=> {
+    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>');
 });
 
-// Route for chat
-app.get('/chat', (req, res) => {
-    res.sendFile(__dirname + '/public/chat.html');
+app.post('/product', (req, res ,next) => {
+    console.log(req.body);
+    res.redirect('/');
 });
 
-// Route for storing messages
-app.post('/message', (req, res) => {
-    const { username, message } = req.body;
-    const data = `${username}: ${message}\n`;
-    fs.appendFile('messages.txt', data, (err) => {
-        if (err) throw err;
-        console.log('Message saved!');
-    });
-    res.redirect('/chat');
+app.use('/', (req, res, next) => {
+    res.send('<h1>Hello from Express!</h1>');
 });
 
-// Start the server
-app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(4000);
