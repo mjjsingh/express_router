@@ -1,15 +1,15 @@
 
-product.css (341 B)
-file_download Download Save to Drive Save to Drive more_vert
 .product-form {
     width: 20rem;
     max-width: 90%;
     margin: auto;
+    display: block;
 }
 
 .product-item {
     width: 20rem;
     max-width: 95%;
+    margin: 1rem;
 }
 
 .product__title {
